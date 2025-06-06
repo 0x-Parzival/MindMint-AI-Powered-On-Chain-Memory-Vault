@@ -1,0 +1,20 @@
+[package]
+name = "journal"
+version = "0.1.0"
+description = "MindMint Journal Program" # Added description
+edition = "2021"
+
+[lib] # Added lib section
+crate-type = ["cdylib", "lib"]
+
+[features] # Added features section
+default = []
+cpi = ["no-entrypoint"]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+idl-build = ["anchor-lang/idl-build"]
+
+
+[dependencies]
+anchor-lang = "0.28.0" # User specified 0.28.0. Consider updating to latest stable if appropriate (e.g., 0.29.0 or 0.30.0 if available and compatible)

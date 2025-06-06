@@ -1,0 +1,26 @@
+node_modules/
+target/
+.DS_Store
+.env
+
+# Next.js specific
+.next/
+out/
+
+# Anchor specific
+program-id.json
+
+# Rust specific
+Cargo.lock
+
+# Python specific
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/

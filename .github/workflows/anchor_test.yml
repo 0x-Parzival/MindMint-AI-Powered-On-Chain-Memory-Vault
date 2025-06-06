@@ -1,17 +1,23 @@
 name: Anchor Test
-on: [push, pull_request]
+
+on:
+  push:
+    branches:
+      - main
+      - initial-structure
+  pull_request:
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install dependencies
+      - name: Install Rust and Anchor CLI
         run: |
-          curl -sSf https://sh.rustup.rs | sh -s -- -y
-          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
-          source "$HOME/.cargo/env"
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+          source $HOME/.cargo/env
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH # Ensure cargo bin is in PATH for subsequent steps
           cargo install --git https://github.com/project-serum/anchor anchor-cli --locked
-      - name: Run Anchor Tests
-        run: |
-          cd mindmint/contracts/journal
-          anchor test
+      - name: Run Anchor tests
+        working-directory: mindmint/contracts/journal # Adjusted path to be relative to repo root
+        run: anchor test
