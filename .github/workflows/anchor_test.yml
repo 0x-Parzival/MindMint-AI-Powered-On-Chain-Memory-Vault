@@ -1,0 +1,17 @@
+name: Anchor Test
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: |
+          curl -sSf https://sh.rustup.rs | sh -s -- -y
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+          source "$HOME/.cargo/env"
+          cargo install --git https://github.com/project-serum/anchor anchor-cli --locked
+      - name: Run Anchor Tests
+        run: |
+          cd mindmint/contracts/journal
+          anchor test
